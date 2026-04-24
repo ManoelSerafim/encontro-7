@@ -87,4 +87,14 @@ export class TarefasService {
 
         return tarefaAtualizada;
     }
+    
+    remover(id: number) {
+        const tarefa = this.buscarPorId(id);
+
+        this.tarefas = this.tarefas.filter((item) => item.id !== id);
+
+        return {
+            mensagem: `Tarefa ${tarefa.id} removida com sucesso`,
+        };
+    }
 }

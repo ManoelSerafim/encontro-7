@@ -1,4 +1,4 @@
-import { BadRequestException, Controller, Get, Param, Query, Post, Body, Patch } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Param, Query, Post, Body, Patch, Delete } from '@nestjs/common';
 import { TarefasService } from './tarefas.service';
 
 @Controller('tarefas')
@@ -63,5 +63,16 @@ export class TarefasController {
         }
 
         return this.tarefasService.atualizarParcial(idNumero, body);
+    }
+
+    @Delete(':id')
+    remover(@Param('id') id: string) {
+        const idNumero = Number(id);
+
+        if (Number.isNaN(idNumero)) {
+            throw new BadRequestException('Parametro "id" deve ser numerico');
+        }
+
+        return this.tarefasService.remover(idNumero);
     }
 }
